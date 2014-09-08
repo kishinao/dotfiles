@@ -43,6 +43,9 @@ unsetopt auto_menu
 # cd -[tab]で過去のディレクトリにひとっ飛びできるようにする
 setopt auto_pushd
 
+#Emacキーバインド
+bindkey -e
+
 # ディレクトリ名を入力するだけでcdできるようにする
 setopt auto_cd
 
@@ -121,3 +124,21 @@ alias ll="ls -1"
 
 # tree
 alias tree="tree -NC" # N: 文字化け対策, C:色をつける
+
+
+# -------------------------------------
+# tmux 自動起動
+# -------------------------------------
+if [ -z "$TMUX" -a -z "$STY" ]; then
+    if type tmuxx >/dev/null 2>&1; then
+        tmuxx
+    elif type tmux >/dev/null 2>&1; then
+        if tmux has-session && tmux list-sessions | /usr/bin/grep -qE '.*]$'; then
+            tmux attach && echo "tmux attached session "
+        else
+            tmux new-session && echo "tmux created new session"
+        fi
+    elif type screen >/dev/null 2>&1; then
+        screen -rx || screen -D -RR
+    fi
+fi
