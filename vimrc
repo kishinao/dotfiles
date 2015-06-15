@@ -74,7 +74,7 @@ call neobundle#begin(expand('~/.vim/bundle/'))
     NeoBundle 'Shougo/neosnippet'
     " 後に機能追加する
     " NeoBundle 'Shougo/unite.vim'
-    NeoBundle 'Shougo/vimproc'
+    " NeoBundle 'Shougo/vimproc'
     NeoBundle 'Lokaltog/vim-powerline'
     NeoBundle 'scrooloose/nerdtree'
     NeoBundle 'thinca/vim-quickrun'
@@ -82,6 +82,7 @@ call neobundle#begin(expand('~/.vim/bundle/'))
     NeoBundle 'Shougo/vimshell'
     NeoBundle 'w0ng/vim-hybrid'
     NeoBundle 'nanotech/jellybeans.vim'
+    NeoBundle 'scrooloose/syntastic'
 call neobundle#end()
 
 filetype plugin indent on     " Required!
@@ -193,3 +194,33 @@ autocmd FileType python map <C-N> :!nosetests % -s -v -a ''
 
 " For Python_diction
 autocmd FileType python let g:pydiction_location = '~/.vim/pydiction/complete-dict'
+
+
+" ============================================================
+" for javascript edit
+" ============================================================
+let g:syntastic_mode_map = {
+\ "mode" : "active",
+\ "active_filetypes" : ["javascript", "json"],
+\}
+"if exists("current_compiler")
+"  finish
+"endif
+"
+"let current_compiler = "javascriptlint"
+"
+"if exists(":CompilerSet") != 2
+"  command -nargs=* CompilerSet setlocal <args>
+"endif
+"
+"let s:cpo_save = &cpo
+"set cpo-=C
+"
+"CompilerSet makeprg=jsl\ -nologo\ -nofilelisting\ -nosummary\ -nocontext\ -process\ %
+"
+"CompilerSet errorformat=%f(%l):\ %m
+"
+"let &cpo = s:cpo_save
+"unlet s:cpo_save
+"
+"autocmd FileType javascript :compiler javascriptlint
