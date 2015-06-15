@@ -66,7 +66,24 @@ filetype off                   " Required!
 if has('vim_starting')
     set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
-call neobundle#rc(expand('~/.vim/bundle/'))
+
+call neobundle#begin(expand('~/.vim/bundle/'))
+    NeoBundleFetch 'Shougo/neobundle.vim'
+    NeoBundle 'Shougo/neobundle.vim'
+    NeoBundle 'Shougo/neocomplcache'
+    NeoBundle 'Shougo/neosnippet'
+    " 後に機能追加する
+    " NeoBundle 'Shougo/unite.vim'
+    NeoBundle 'Shougo/vimproc'
+    NeoBundle 'Lokaltog/vim-powerline'
+    NeoBundle 'scrooloose/nerdtree'
+    NeoBundle 'thinca/vim-quickrun'
+    NeoBundle 'nvie/vim-flake8'
+    NeoBundle 'Shougo/vimshell'
+    NeoBundle 'w0ng/vim-hybrid'
+    NeoBundle 'nanotech/jellybeans.vim'
+call neobundle#end()
+
 filetype plugin indent on     " Required!
 " Installation check.
 if neobundle#exists_not_installed_bundles()
@@ -76,19 +93,6 @@ if neobundle#exists_not_installed_bundles()
     "finish
 endif
 
-NeoBundle 'Shougo/neobundle.vim'
-NeoBundle 'Shougo/neocomplcache'
-NeoBundle 'Shougo/neosnippet'
-" 後に機能追加する
-" NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/vimproc'
-NeoBundle 'Lokaltog/vim-powerline'
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'thinca/vim-quickrun'
-NeoBundle 'nvie/vim-flake8'
-NeoBundle 'Shougo/vimshell'
-NeoBundle 'w0ng/vim-hybrid'
-NeoBundle 'nanotech/jellybeans.vim'
 
 " NERDTree---------------------------------------------------
 let file_name = expand("%")
