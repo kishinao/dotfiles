@@ -1,4 +1,4 @@
-vim/bundle/*
-vim/bundle/.neobundle/install_info
-vim/bundle/nerdtree/*
+vim/*
+vim/\.*
+!vim/bundle/neobundle.vim
 *swp
