@@ -5,3 +5,7 @@ ln -s ~/dotfiles/inputrc ~/.inputrc
 ln -s ~/dotfiles/vim ~/.vim
 ln -s ~/dotfiles/jshintrc ~/.jshintrc
 ls -ltra
+
+cd ~/dotfiles/
+git submodule init
+git submodule update
