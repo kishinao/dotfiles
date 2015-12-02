@@ -16,6 +16,7 @@ export PATH=$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools:/opt/local/bin:/opt
 # packer
 export PATH=/opt/packer:$PATH
 
+zstyle ':completion:*' list-colors 'di=34' 'ln=35' 'so=32' 'ex=31' 'bd=46;34' 'cd=43;34'
 
 # -------------------------------------
 # zshのオプション
@@ -152,6 +153,7 @@ if [ -z "$TMUX" -a -z "$STY" ]; then
     fi
 fi
 
+<<<<<<< HEAD
 # -------------------------------------
 # Python virtualenvの設定
 # -------------------------------------
@@ -217,3 +219,17 @@ function peco-history-selection() {
 
 zle -N peco-history-selection
 bindkey '^R' peco-history-selection
+# 履歴ファイルの保存先
+export HISTFILE=${HOME}/.zsh_history
+#
+# メモリに保存される履歴の件数
+export HISTSIZE=1000
+
+# 履歴ファイルに保存される履歴の件数
+export SAVEHIST=100000
+
+# 重複を記録しない
+setopt hist_ignore_dups
+
+# 開始と終了を記録
+setopt EXTENDED_HISTORY

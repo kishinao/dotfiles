@@ -29,6 +29,7 @@ set ttymouse=xterm2
 " colorscheme----------------------------------------------
 " colorscheme koehler
 "colorscheme hybrid
+colorscheme desert
 set t_Co=256
 
 " 罫線----------------------------------------------
@@ -72,7 +73,28 @@ if has('vim_starting')
 endif
 
 call neobundle#begin(expand('~/.vim/bundle/'))
-NeoBundleFetch 'Shougo/neobundle.vim'
+    NeoBundleFetch 'Shougo/neobundle.vim'
+    NeoBundle 'Shougo/neobundle.vim'
+    NeoBundle 'Shougo/neocomplcache'
+    NeoBundle 'Shougo/neosnippet'
+    " 後に機能追加する
+    " NeoBundle 'Shougo/unite.vim'
+    NeoBundle 'Shougo/vimproc', {
+      \ 'build' : {
+        \ 'windows' : 'make -f make_mingw32.mak',
+        \ 'cygwin' : 'make -f make_cygwin.mak',
+        \ 'mac' : 'make -f make_mac.mak',
+        \ 'unix' : 'make -f make_unix.mak',
+      \ },
+      \ }
+    NeoBundle 'Lokaltog/vim-powerline'
+    NeoBundle 'scrooloose/nerdtree'
+    NeoBundle 'thinca/vim-quickrun'
+    NeoBundle 'nvie/vim-flake8'
+    NeoBundle 'Shougo/vimshell'
+    NeoBundle 'w0ng/vim-hybrid'
+    NeoBundle 'nanotech/jellybeans.vim'
+    NeoBundle 'scrooloose/syntastic'
 call neobundle#end()
 
 filetype plugin indent on     " Required!
@@ -83,24 +105,6 @@ if neobundle#exists_not_installed_bundles()
     echomsg 'Please execute ":NeoBundleInstall" command.'
     "finish
 endif
-
-NeoBundle 'Shougo/neobundle.vim'
-" NeoBundle 'Shougo/neocomplcache'
-" NeoBundle 'Shougo/neosnippet'
-" 後に機能追加する
-" NeoBundle 'Shougo/unite.vim'
-" NeoBundle 'Shougo/vimproc'
-" NeoBundle 'Lokaltog/vim-powerline'
-NeoBundle 'bling/vim-airline'
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'thinca/vim-quickrun'
-NeoBundle 'nvie/vim-flake8'
-NeoBundle 'Shougo/vimshell'
-NeoBundle 'w0ng/vim-hybrid'
-NeoBundle 'nanotech/jellybeans.vim'
-NeoBundle 'plasticboy/vim-markdown'
-NeoBundle 'kannokanno/previm'
-NeoBundle 'tyru/open-browser.vim'
 
 " NERDTree---------------------------------------------------
 let file_name = expand("%")
@@ -134,38 +138,50 @@ autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 "endif
 
 " quickrun settings---------------------------------------------------
-autocmd BufWinEnter,BufNewFile *_test.py set filetype=python.test
-
+"autocmd BufWinEnter,BufNewFile *_test.py set filetype=python.test
 " Space q でquickrunを実行するようにしている
-silent! map <unique> <Space>r <Plug>(quickrun)
+"silent! map <unique> <Space>r <Plug>(quickrun)
 
 let g:quickrun_config = {}
+let g:quickrun_config = {}
+let g:quickrun_config._ = {'runner' : 'vimproc', "runner/vimproc/updatetime" : 10}
+let g:quickrun_config['ruby.rspec'] = {'command': 'rspec', 'cmdopt': '-cfd'}
 
-let g:quickrun_config._ = {'runner' : 'vimproc'}
+augroup QRunRSpec
+  autocmd!
+  autocmd BufWinEnter,BufNewFile *_spec.rb set filetype=ruby.rspec
+augroup END
 
+nnoremap [quickrun] <Nop>
+nmap <Space>k [quickrun]
+nnoremap <silent> [quickrun]r :call QRunRspecCurrentLine()<CR>
+fun! QRunRspecCurrentLine()
+  let line = line(".")
+  exe ":QuickRun -exec '%c %s%o' -cmdopt ':" . line . " -cfd'"
+endfun
+
+"let g:quickrun_config._ = {'runner' : 'vimproc'}
 "let g:quickrun_config['*'] = {'runmode': 'async:remote:vimproc'}
-
-let g:quickrun_config['python.test'] = {'command': 'nosetests', 'cmdopt': '-s -v --nologcapture', 'hook/shebang/enable' : 0}
+"let g:quickrun_config['python.test'] = {'command': 'nosetests', 'cmdopt': '-s -v --nologcapture', 'hook/shebang/enable' : 0}
 "let g:quickrun_config['python.test'] = {'command': 'nosetests', 'cmdopt': '-s -v --nologcapture -a'}
 
 " for rspec conf is below
 "let g:quickrun_config._ = {'runner' : 'vimproc'}
 "let g:quickrun_config['ruby.rspec'] = {'command': 'rspec', 'cmdopt': '-cfs'}
 ""let g:quickrun_config['*'] = {'runmode': 'async:remote:vimproc'}
-"
+
 "augroup UjihisaRSpec
 "  autocmd!
 "  autocmd BufWinEnter,BufNewFile *_rspec.ruby set filetype=ruby.rspec
 "augroup END
-"
-"
-nnoremap [quickrun] <Nop>
-nmap <Space>k [quickrun]
-nnoremap <silent> [quickrun]r :call QRunRspecCurrentLine()<CR>
-fun! QRunRspecCurrentLine()
-  let line = line(".")
-  exe ":QuickRun -cmdopt '-s -v --nologcapture -a " . '"now"' . "'"
-endfun
+
+"nnoremap [quickrun] <Nop>
+"nmap <Space>k [quickrun]
+"nnoremap <silent> [quickrun]r :call QRunRspecCurrentLine()<CR>
+"fun! QRunRspecCurrentLine()
+"  let line = line(".")
+"  exe ":QuickRun -cmdopt '-s -v --nologcapture -a " . '"now"' . "'"
+"endfun
 
 " window risezer---------------------------------------------------
 let g:winresizer_enable = 1
@@ -206,3 +222,40 @@ autocmd FileType python let g:pydiction_location = '~/.vim/pydiction/complete-di
 " for Markdown edit
 " ============================================================
 au BufRead,BufNewFile *.md set filetype=markdown
+
+" ============================================================
+" for javascript edit
+" ============================================================
+let g:syntastic_mode_map = {
+\ "mode" : "active",
+\ "active_filetypes" : ["javascript", "json"],
+\}
+"if exists("current_compiler")
+"  finish
+"endif
+"
+"let current_compiler = "javascriptlint"
+"
+"if exists(":CompilerSet") != 2
+"  command -nargs=* CompilerSet setlocal <args>
+"endif
+"
+"let s:cpo_save = &cpo
+"set cpo-=C
+"
+"CompilerSet makeprg=jsl\ -nologo\ -nofilelisting\ -nosummary\ -nocontext\ -process\ %
+"
+"CompilerSet errorformat=%f(%l):\ %m
+"
+"let &cpo = s:cpo_save
+"unlet s:cpo_save
+"
+"autocmd FileType javascript :compiler javascriptlint
+
+" ============================================================
+" for ruby edit
+" ============================================================
+autocmd FileType ruby setl autoindent
+autocmd FileType ruby setl smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
+autocmd FileType ruby setl expandtab tabstop=2 shiftwidth=2 softtabstop=2
+autocmd FileType ruby setl textwidth=80
