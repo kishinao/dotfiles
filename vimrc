@@ -64,6 +64,13 @@ inoremap <C-J> <ESC>
 " ============================================================
 " plugin
 " ============================================================
+if has('mac')
+  let g:vimproc_dll_path = $VIMRUNTIME . '/bundle/vimproc/lib/vimproc_mac.so'
+elseif has('win32')
+  let g:vimproc_dll_path = $HOME . '.vim/bundle/vimproc/autoload/vimproc_win32.dll'
+elseif has('win64')
+  let g:vimproc_dll_path = $HOME . '.vim/bundle/vimproc/autoload/vimproc_win64.dll'
+endif
 
 " neobundle---------------------------------------------------
 set nocompatible               " Be iMproved
@@ -77,8 +84,7 @@ call neobundle#begin(expand('~/.vim/bundle/'))
     NeoBundle 'Shougo/neobundle.vim'
     NeoBundle 'Shougo/neocomplcache'
     NeoBundle 'Shougo/neosnippet'
-    " 後に機能追加する
-    " NeoBundle 'Shougo/unite.vim'
+    NeoBundle 'Shougo/unite.vim'
     NeoBundle 'Shougo/vimproc', {
       \ 'build' : {
         \ 'windows' : 'make -f make_mingw32.mak',
