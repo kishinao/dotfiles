@@ -15,6 +15,9 @@ set smarttab
 set shiftwidth=4
 set softtabstop=4
 set noet
+set expandtab
+set tabstop=2
+set shiftwidth=2
 
 set backspace=indent,eol,start
 set wildmenu
@@ -42,6 +45,7 @@ set history=100
 set ignorecase
 set smartcase
 set wrapscan
+set incsearch
 
 " for Whitespace----------------------------------------------
 " highlight WhitespaceEOL ctermbg=red guibg=red
@@ -66,7 +70,11 @@ filetype off                   " Required!
 if has('vim_starting')
     set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
-call neobundle#rc(expand('~/.vim/bundle/'))
+
+call neobundle#begin(expand('~/.vim/bundle/'))
+NeoBundleFetch 'Shougo/neobundle.vim'
+call neobundle#end()
+
 filetype plugin indent on     " Required!
 " Installation check.
 if neobundle#exists_not_installed_bundles()
@@ -77,18 +85,22 @@ if neobundle#exists_not_installed_bundles()
 endif
 
 NeoBundle 'Shougo/neobundle.vim'
-NeoBundle 'Shougo/neocomplcache'
-NeoBundle 'Shougo/neosnippet'
+" NeoBundle 'Shougo/neocomplcache'
+" NeoBundle 'Shougo/neosnippet'
 " 後に機能追加する
 " NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/vimproc'
-NeoBundle 'Lokaltog/vim-powerline'
+" NeoBundle 'Shougo/vimproc'
+" NeoBundle 'Lokaltog/vim-powerline'
+NeoBundle 'bling/vim-airline'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'nvie/vim-flake8'
 NeoBundle 'Shougo/vimshell'
 NeoBundle 'w0ng/vim-hybrid'
 NeoBundle 'nanotech/jellybeans.vim'
+NeoBundle 'plasticboy/vim-markdown'
+NeoBundle 'kannokanno/previm'
+NeoBundle 'tyru/open-browser.vim'
 
 " NERDTree---------------------------------------------------
 let file_name = expand("%")
@@ -109,17 +121,17 @@ autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 
 " neosnippet---------------------------------------------------
 " Plugin key-mappings.
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-
-" SuperTab like snippets behavior.
-imap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
-" For snippet_complete marker.
-if has('conceal')
-  set conceallevel=2 concealcursor=i
-endif
+"imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+"smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+"
+"" SuperTab like snippets behavior.
+"imap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+"smap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+"
+"" For snippet_complete marker.
+"if has('conceal')
+"  set conceallevel=2 concealcursor=i
+"endif
 
 " quickrun settings---------------------------------------------------
 autocmd BufWinEnter,BufNewFile *_test.py set filetype=python.test
@@ -189,3 +201,8 @@ autocmd FileType python map <C-N> :!nosetests % -s -v -a ''
 
 " For Python_diction
 autocmd FileType python let g:pydiction_location = '~/.vim/pydiction/complete-dict'
+
+" ============================================================
+" for Markdown edit
+" ============================================================
+au BufRead,BufNewFile *.md set filetype=markdown

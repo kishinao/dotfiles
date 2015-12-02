@@ -9,6 +9,13 @@ export LC_ALL=en_US.UTF-8
 # エディタ
 export EDITOR=/usr/bin/vim
 
+# android sdk
+export ANDROID_HOME=/Applications/android-sdk-mac_x86
+export PATH=$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools:/opt/local/bin:/opt/local/sbin/:$PATH
+
+# packer
+export PATH=/opt/packer:$PATH
+
 
 # -------------------------------------
 # zshのオプション
@@ -125,6 +132,8 @@ alias ll="ls -1"
 # tree
 alias tree="tree -NC" # N: 文字化け対策, C:色をつける
 
+# rspec
+alias rspec="rspec -cfd"
 
 # -------------------------------------
 # tmux 自動起動
@@ -142,3 +151,69 @@ if [ -z "$TMUX" -a -z "$STY" ]; then
         screen -rx || screen -D -RR
     fi
 fi
+
+# -------------------------------------
+# Python virtualenvの設定
+# -------------------------------------
+export WORKON_HOME=$HOME/.virtualenvs
+source `which virtualenvwrapper.sh`
+
+#
+# 履歴
+#
+# window間でのヒストリーの共有
+setopt share_history
+
+# 履歴をファイルに出力
+HISTFILE=~/.zsh_history
+
+# メモリ上に保存される件数（検索できる件数）
+HISTSIZE=100000
+
+# ファイルに保存される件数
+SAVEHIST=100000
+
+# rootは履歴を残さないようにする
+if [ $UID = 0 ]; then
+  unset HISTFILE
+  SAVEHIST=0
+fi
+
+# 履歴検索
+autoload history-search-end
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
+bindkey "^P" history-beginning-search-backward-end
+bindkey "^N" history-beginning-search-forward-end
+
+# 履歴を複数の端末で共有する
+setopt share_history
+
+# 直前と同じコマンドの場合は履歴に追加しない
+setopt hist_ignore_dups
+
+# 重複するコマンドは古い法を削除する
+setopt hist_ignore_all_dups
+
+# 複数のzshを同時に使用した際に履歴ファイルを上書きせず追加する
+setopt append_history
+
+# 履歴ファイルにzsh の開始・終了時刻を記録する
+setopt extended_history
+
+# ヒストリを呼び出してから実行する間に一旦編集できる状態になる
+setopt hist_verify
+
+# 先頭がスペースで始まる場合は履歴に追加しない
+setopt hist_ignore_space
+export PATH=$PATH:/Users/naotospace/.nodebrew/current/bin
+
+# peco setting
+function peco-history-selection() {
+    BUFFER=`history -n 1 | tail -r  | awk '!a[$0]++' | peco`
+    CURSOR=$#BUFFER
+    zle reset-prompt
+}
+
+zle -N peco-history-selection
+bindkey '^R' peco-history-selection
