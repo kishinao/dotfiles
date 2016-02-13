@@ -1,7 +1,3 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =5
-let g:netrw_dirhist_1='/Users/naotospace/dotfiles'
-let g:netrw_dirhist_2='/Users/naotospace/workspace/python/practice/chatwork_manipulator/chatwork_wrapper.py'
-let g:netrw_dirhist_3='/Users/naotospace/workspace/gitRepos/heyapeta/build/heyapeta.build'
-let g:netrw_dirhist_4='/Users/naotospace/workspace/python/practice/behave/tutorial'
-let g:netrw_dirhist_5='/Users/naotospace/workspace/ruby/rspec_study/dynamic_class/dynamic_class_run.rb'
+let g:netrw_dirhist_cnt =1
+let g:netrw_dirhist_1='/Users/naotospace/dotfiles/vim'

@@ -29,7 +29,6 @@ set ttymouse=xterm2
 " colorscheme----------------------------------------------
 " colorscheme koehler
 "colorscheme hybrid
-colorscheme desert
 set t_Co=256
 
 " 罫線----------------------------------------------
@@ -47,6 +46,7 @@ set ignorecase
 set smartcase
 set wrapscan
 set incsearch
+set hlsearch
 
 " for Whitespace----------------------------------------------
 " highlight WhitespaceEOL ctermbg=red guibg=red
@@ -84,6 +84,7 @@ call neobundle#begin(expand('~/.vim/bundle/'))
     NeoBundle 'Shougo/neobundle.vim'
     NeoBundle 'Shougo/neocomplcache'
     NeoBundle 'Shougo/neosnippet'
+    NeoBundle "Shougo/neosnippet-snippets"
     NeoBundle 'Shougo/unite.vim'
     NeoBundle 'Shougo/vimproc', {
       \ 'build' : {
@@ -101,7 +102,13 @@ call neobundle#begin(expand('~/.vim/bundle/'))
     NeoBundle 'w0ng/vim-hybrid'
     NeoBundle 'nanotech/jellybeans.vim'
     NeoBundle 'scrooloose/syntastic'
+    " render - :PrevimOpen
+    NeoBundle 'plasticboy/vim-markdown'
+    NeoBundle 'kannokanno/previm'
+    NeoBundle 'tyru/open-browser.vim'
+    NeoBundle 'vim-scripts/grep.vim'
 call neobundle#end()
+colorscheme jellybeans
 
 filetype plugin indent on     " Required!
 " Installation check.
@@ -131,40 +138,45 @@ autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 
 " neosnippet---------------------------------------------------
 " Plugin key-mappings.
-"imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-"smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 "
 "" SuperTab like snippets behavior.
-"imap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
-"smap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+imap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 "
 "" For snippet_complete marker.
-"if has('conceal')
-"  set conceallevel=2 concealcursor=i
-"endif
+if has('conceal')
+  set conceallevel=2 concealcursor=i
+endif
 
 " quickrun settings---------------------------------------------------
-"autocmd BufWinEnter,BufNewFile *_test.py set filetype=python.test
-" Space q でquickrunを実行するようにしている
-"silent! map <unique> <Space>r <Plug>(quickrun)
 
-let g:quickrun_config = {}
-let g:quickrun_config = {}
-let g:quickrun_config._ = {'runner' : 'vimproc', "runner/vimproc/updatetime" : 10}
-let g:quickrun_config['ruby.rspec'] = {'command': 'rspec', 'cmdopt': '-cfd'}
+let g:quickrun_config={'*': {'split': ''}}
+set splitbelow
 
-augroup QRunRSpec
-  autocmd!
-  autocmd BufWinEnter,BufNewFile *_spec.rb set filetype=ruby.rspec
-augroup END
 
-nnoremap [quickrun] <Nop>
-nmap <Space>k [quickrun]
-nnoremap <silent> [quickrun]r :call QRunRspecCurrentLine()<CR>
-fun! QRunRspecCurrentLine()
-  let line = line(".")
-  exe ":QuickRun -exec '%c %s%o' -cmdopt ':" . line . " -cfd'"
-endfun
+" autocmd BufWinEnter,BufNewFile *_test.py set filetype=python.test
+" " Space q でquickrunを実行するようにしている
+" silent! map <unique> <Space>r <Plug>(quickrun)
+" 
+" let g:quickrun_config = {}
+" let g:quickrun_config = {}
+" let g:quickrun_config._ = {'runner' : 'vimproc', "runner/vimproc/updatetime" : 10}
+" let g:quickrun_config['ruby.rspec'] = {'command': 'rspec', 'cmdopt': '-cfd'}
+" 
+" augroup QRunRSpec
+"   autocmd!
+"   autocmd BufWinEnter,BufNewFile *_spec.rb set filetype=ruby.rspec
+" augroup END
+" 
+" nnoremap [quickrun] <Nop>
+" nmap <Space>k [quickrun]
+" nnoremap <silent> [quickrun]r :call QRunRspecCurrentLine()<CR>
+" fun! QRunRspecCurrentLine()
+"   let line = line(".")
+"   exe ":QuickRun -exec '%c %s%o' -cmdopt ':" . line . " -cfd'"
+" endfun
 
 "let g:quickrun_config._ = {'runner' : 'vimproc'}
 "let g:quickrun_config['*'] = {'runmode': 'async:remote:vimproc'}

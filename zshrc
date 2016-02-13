@@ -16,6 +16,10 @@ export PATH=$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools:/opt/local/bin:/opt
 # packer
 export PATH=/opt/packer:$PATH
 
+# HOMEBREW_CASK
+export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+
+
 zstyle ':completion:*' list-colors 'di=34' 'ln=35' 'so=32' 'ex=31' 'bd=46;34' 'cd=43;34'
 
 # -------------------------------------
