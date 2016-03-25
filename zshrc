@@ -1,238 +1,114 @@
-# -------------------------------------
-# 環境変数
-# -------------------------------------
+# Path to your oh-my-zsh installation.
+  export ZSH=/home/kishinao/.oh-my-zsh
 
-# SSHで接続した先で日本語が使えるようにする
-export LC_CTYPE=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
+# Set name of the theme to load.
+# Look in ~/.oh-my-zsh/themes/
+# Optionally, if you set this to "random", it'll load a random theme each
+# time that oh-my-zsh is loaded.
+ZSH_THEME="eastwood"
 
-# エディタ
-export EDITOR=/usr/local/bin/vim
+# Uncomment the following line to use case-sensitive completion.
+# CASE_SENSITIVE="true"
 
-# android sdk
-export ANDROID_HOME=/Applications/android-sdk-mac_x86
-export PATH=$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools:/opt/local/bin:/opt/local/sbin/:$PATH
+# Uncomment the following line to use hyphen-insensitive completion. Case
+# sensitive completion must be off. _ and - will be interchangeable.
+# HYPHEN_INSENSITIVE="true"
 
-# packer
-export PATH=/opt/packer:$PATH
+# Uncomment the following line to disable bi-weekly auto-update checks.
+# DISABLE_AUTO_UPDATE="true"
 
-# HOMEBREW_CASK
-export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+# Uncomment the following line to change how often to auto-update (in days).
+# export UPDATE_ZSH_DAYS=13
 
+# Uncomment the following line to disable colors in ls.
+DISABLE_LS_COLORS="true"
 
-zstyle ':completion:*' list-colors 'di=34' 'ln=35' 'so=32' 'ex=31' 'bd=46;34' 'cd=43;34'
+# Uncomment the following line to disable auto-setting terminal title.
+# DISABLE_AUTO_TITLE="true"
 
-# -------------------------------------
-# zshのオプション
-# -------------------------------------
+# Uncomment the following line to enable command auto-correction.
+# ENABLE_CORRECTION="true"
 
-## 補完機能の強化
-autoload -U compinit
-compinit
+# Uncomment the following line to display red dots whilst waiting for completion.
+# COMPLETION_WAITING_DOTS="true"
 
-## 入力しているコマンド名が間違っている場合にもしかして：を出す。
-setopt correct
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-# ビープを鳴らさない
-setopt nobeep
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# HIST_STAMPS="mm/dd/yyyy"
 
-## 色を使う
-setopt prompt_subst
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
 
-## ^Dでログアウトしない。
-setopt ignoreeof
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(git)
 
-## バックグラウンドジョブが終了したらすぐに知らせる。
-setopt no_tify
+# User configuration
 
-## 直前と同じコマンドをヒストリに追加しない
-setopt hist_ignore_dups
+  export PATH="/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/opt/aws/bin:/home/kishinao/.local/bin:/home/kishinao/bin:/opt/aws/bin:/home/kishinao/bin:/opt/aws/bin"
+# export MANPATH="/usr/local/man:$MANPATH"
 
-# 補完
-## タブによるファイルの順番切り替えをしない
-unsetopt auto_menu
+# rbenv
+export RBENV_ROOT="/usr/local/rbenv"
+export PATH="${RBENV_ROOT}/bin:${PATH}"
+eval "$(rbenv init -)"
 
-# cd -[tab]で過去のディレクトリにひとっ飛びできるようにする
-setopt auto_pushd
+source $ZSH/oh-my-zsh.sh
 
-#Emacキーバインド
-bindkey -e
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
 
-# ディレクトリ名を入力するだけでcdできるようにする
-setopt auto_cd
+# Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
 
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
 
-# -------------------------------------
-# パス
-# -------------------------------------
+# ssh
+# export SSH_KEY_PATH="~/.ssh/dsa_id"
 
-# 重複する要素を自動的に削除
-typeset -U path cdpath fpath manpath
-
-path=(
-    $HOME/bin(N-/)
-    /usr/local/bin(N-/)
-    /usr/local/sbin(N-/)
-    $path
-)
-
-
-# -------------------------------------
-# プロンプト
-# -------------------------------------
-
-autoload -U promptinit; promptinit
-autoload -Uz colors; colors
-autoload -Uz vcs_info
-autoload -Uz is-at-least
-
-# begin VCS
-zstyle ":vcs_info:*" enable git svn hg bzr
-zstyle ":vcs_info:*" formats "(%s)-[%b]"
-zstyle ":vcs_info:*" actionformats "(%s)-[%b|%a]"
-zstyle ":vcs_info:(svn|bzr):*" branchformat "%b:r%r"
-zstyle ":vcs_info:bzr:*" use-simple true
-
-zstyle ":vcs_info:*" max-exports 6
-
-if is-at-least 4.3.10; then
-    zstyle ":vcs_info:git:*" check-for-changes true # commitしていないのをチェック
-    zstyle ":vcs_info:git:*" stagedstr "<S>"
-    zstyle ":vcs_info:git:*" unstagedstr "<U>"
-    zstyle ":vcs_info:git:*" formats "(%b) %c%u"
-    zstyle ":vcs_info:git:*" actionformats "(%s)-[%b|%a] %c%u"
-fi
-
-function vcs_prompt_info() {
-    LANG=en_US.UTF-8 vcs_info
-    [[ -n "$vcs_info_msg_0_" ]] && echo -n " %{$fg[yellow]%}$vcs_info_msg_0_%f"
-}
-# end VCS
-
-OK="^_^ "
-NG="X_X "
-
-PROMPT=""
-#PROMPT+="%(?.%F{green}$OK%f.%F{red}$NG%f) "
-PROMPT+="%F{blue}%~%f"
-PROMPT+="\$(vcs_prompt_info)"
-PROMPT+="
-"
-PROMPT+="%% "
-
-RPROMPT="[%*]"
-
-
-# -------------------------------------
-# エイリアス
-# -------------------------------------
-
-# ls
-alias ls="ls -G" # color for darwin
-alias l="ls -la"
-alias la="ls -la"
-alias l1="ls -1"
-alias ll="ls -1"
-
-# tree
-alias tree="tree -NC" # N: 文字化け対策, C:色をつける
-
-# rspec
-alias rspec="rspec -cfd"
-
-# -------------------------------------
-# tmux 自動起動
-# -------------------------------------
-if [ -z "$TMUX" -a -z "$STY" ]; then
-    if type tmuxx >/dev/null 2>&1; then
-        tmuxx
-    elif type tmux >/dev/null 2>&1; then
-        if tmux has-session && tmux list-sessions | /usr/bin/grep -qE '.*]$'; then
-            tmux attach && echo "tmux attached session "
-        else
-            tmux new-session && echo "tmux created new session"
-        fi
-    elif type screen >/dev/null 2>&1; then
-        screen -rx || screen -D -RR
-    fi
-fi
-
-# -------------------------------------
-# Python virtualenvの設定
-# -------------------------------------
-export WORKON_HOME=$HOME/.virtualenvs
-source `which virtualenvwrapper.sh`
-
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
 #
-# 履歴
-#
-# window間でのヒストリーの共有
-setopt share_history
-
-# 履歴をファイルに出力
-HISTFILE=~/.zsh_history
-
-# メモリ上に保存される件数（検索できる件数）
-HISTSIZE=100000
-
-# ファイルに保存される件数
-SAVEHIST=100000
-
-# rootは履歴を残さないようにする
-if [ $UID = 0 ]; then
-  unset HISTFILE
-  SAVEHIST=0
-fi
-
-# 履歴検索
-autoload history-search-end
-zle -N history-beginning-search-backward-end history-search-end
-zle -N history-beginning-search-forward-end history-search-end
-bindkey "^P" history-beginning-search-backward-end
-bindkey "^N" history-beginning-search-forward-end
-
-# 履歴を複数の端末で共有する
-setopt share_history
-
-# 直前と同じコマンドの場合は履歴に追加しない
-setopt hist_ignore_dups
-
-# 重複するコマンドは古い法を削除する
-setopt hist_ignore_all_dups
-
-# 複数のzshを同時に使用した際に履歴ファイルを上書きせず追加する
-setopt append_history
-
-# 履歴ファイルにzsh の開始・終了時刻を記録する
-setopt extended_history
-
-# ヒストリを呼び出してから実行する間に一旦編集できる状態になる
-setopt hist_verify
-
-# 先頭がスペースで始まる場合は履歴に追加しない
-setopt hist_ignore_space
-export PATH=$PATH:/Users/naotospace/.nodebrew/current/bin
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # peco setting
-function peco-history-selection() {
-    BUFFER=`history -n 1 | tail -r  | awk '!a[$0]++' | peco`
+function peco-select-history() {
+    local tac
+    if which tac > /dev/null; then
+        tac="tac"
+    else
+        tac="tail -r"
+    fi
+    BUFFER=$(\history -n 1 | \
+        eval $tac | \
+        peco --query "$LBUFFER")
     CURSOR=$#BUFFER
-    zle reset-prompt
+    zle clear-screen
 }
+zle -N peco-select-history
+bindkey '^r' peco-select-history
 
-zle -N peco-history-selection
-bindkey '^R' peco-history-selection
-# 履歴ファイルの保存先
-export HISTFILE=${HOME}/.zsh_history
-#
-# メモリに保存される履歴の件数
-export HISTSIZE=1000
+# ヒストリ(履歴)を保存、数を増やす
+HISTFILE=~/.zsh_history
+HISTSIZE=100000
+SAVEHIST=100000
 
-# 履歴ファイルに保存される履歴の件数
-export SAVEHIST=100000
-
-# 重複を記録しない
-setopt hist_ignore_dups
-
-# 開始と終了を記録
-setopt EXTENDED_HISTORY
+# 256color
+export TERM=xterm-256color

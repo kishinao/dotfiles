@@ -3,6 +3,8 @@
 " ============================================================
 syntax on
 set nocompatible
+"syntax enable
+"filetype plugin indent on
 
 " display----------------------------------------------
 set number
@@ -26,18 +28,13 @@ set whichwrap=b,s,h,l,[,],<,>
 set mouse=a
 set ttymouse=xterm2
 
-" colorscheme----------------------------------------------
-" colorscheme koehler
-"colorscheme hybrid
-set t_Co=256
-
 " 罫線----------------------------------------------
 augroup cch
     autocmd! cch
     autocmd WinLeave * set nocursorline
     "autocmd WinLeave * set nocursorcolumn
     autocmd WinEnter,BufRead * set cursorline
-    "autocmd WinEnter,BufRead * set cursorcolumn
+    "autocmd WinEnter,BufRead * set cursorcolumnn
 augroup END
 
 " search----------------------------------------------
@@ -59,7 +56,8 @@ augroup END
 
 " key map edit------------------------------------------------
 inoremap <C-J> <ESC>
-
+nnoremap <silent> gp :bprevious<CR>
+nnoremap <silent> gn :bnext<CR>
 
 " ============================================================
 " plugin
@@ -86,19 +84,21 @@ call neobundle#begin(expand('~/.vim/bundle/'))
     NeoBundle 'Shougo/neosnippet'
     NeoBundle "Shougo/neosnippet-snippets"
     NeoBundle 'Shougo/unite.vim'
-    NeoBundle 'Shougo/vimproc', {
-      \ 'build' : {
-        \ 'windows' : 'make -f make_mingw32.mak',
-        \ 'cygwin' : 'make -f make_cygwin.mak',
-        \ 'mac' : 'make -f make_mac.mak',
-        \ 'unix' : 'make -f make_unix.mak',
-      \ },
-      \ }
+    NeoBundle 'Shougo/neomru.vim'
+    NeoBundle 'Shougo/vimproc.vim', {
+          \ 'build' : {
+          \     'windows' : 'tools\\update-dll-mingw',
+          \     'cygwin' : 'make -f make_cygwin.mak',
+          \     'mac' : 'make',
+          \     'linux' : 'make',
+          \     'unix' : 'gmake',
+          \    },
+          \ },
     NeoBundle 'Lokaltog/vim-powerline'
     NeoBundle 'scrooloose/nerdtree'
     NeoBundle 'thinca/vim-quickrun'
     NeoBundle 'nvie/vim-flake8'
-    NeoBundle 'Shougo/vimshell'
+    "NeoBundle 'Shougo/vimshell'
     NeoBundle 'w0ng/vim-hybrid'
     NeoBundle 'nanotech/jellybeans.vim'
     NeoBundle 'scrooloose/syntastic'
@@ -107,7 +107,20 @@ call neobundle#begin(expand('~/.vim/bundle/'))
     NeoBundle 'kannokanno/previm'
     NeoBundle 'tyru/open-browser.vim'
     NeoBundle 'vim-scripts/grep.vim'
+    NeoBundle 'slim-template/vim-slim.git'
+
 call neobundle#end()
+
+" colorscheme ----------------------------------------------
+if &term =~ "xterm-256color" || "screen-256color"
+  set t_Co=256
+  set t_Sf=[3%dm
+  set t_Sb=[4%dm
+elseif &term =~ "xterm-color"
+  set t_Co=8
+  set t_Sf=[3%dm
+  set t_Sb=[4%dm
+endif
 colorscheme jellybeans
 
 filetype plugin indent on     " Required!
@@ -151,60 +164,22 @@ if has('conceal')
 endif
 
 " quickrun settings---------------------------------------------------
-
 let g:quickrun_config={'*': {'split': ''}}
 set splitbelow
 
-
-" autocmd BufWinEnter,BufNewFile *_test.py set filetype=python.test
-" " Space q でquickrunを実行するようにしている
-" silent! map <unique> <Space>r <Plug>(quickrun)
-" 
-" let g:quickrun_config = {}
-" let g:quickrun_config = {}
-" let g:quickrun_config._ = {'runner' : 'vimproc', "runner/vimproc/updatetime" : 10}
-" let g:quickrun_config['ruby.rspec'] = {'command': 'rspec', 'cmdopt': '-cfd'}
-" 
-" augroup QRunRSpec
-"   autocmd!
-"   autocmd BufWinEnter,BufNewFile *_spec.rb set filetype=ruby.rspec
-" augroup END
-" 
-" nnoremap [quickrun] <Nop>
-" nmap <Space>k [quickrun]
-" nnoremap <silent> [quickrun]r :call QRunRspecCurrentLine()<CR>
-" fun! QRunRspecCurrentLine()
-"   let line = line(".")
-"   exe ":QuickRun -exec '%c %s%o' -cmdopt ':" . line . " -cfd'"
-" endfun
-
-"let g:quickrun_config._ = {'runner' : 'vimproc'}
-"let g:quickrun_config['*'] = {'runmode': 'async:remote:vimproc'}
-"let g:quickrun_config['python.test'] = {'command': 'nosetests', 'cmdopt': '-s -v --nologcapture', 'hook/shebang/enable' : 0}
-"let g:quickrun_config['python.test'] = {'command': 'nosetests', 'cmdopt': '-s -v --nologcapture -a'}
-
-" for rspec conf is below
-"let g:quickrun_config._ = {'runner' : 'vimproc'}
-"let g:quickrun_config['ruby.rspec'] = {'command': 'rspec', 'cmdopt': '-cfs'}
-""let g:quickrun_config['*'] = {'runmode': 'async:remote:vimproc'}
-
-"augroup UjihisaRSpec
-"  autocmd!
-"  autocmd BufWinEnter,BufNewFile *_rspec.ruby set filetype=ruby.rspec
-"augroup END
-
-"nnoremap [quickrun] <Nop>
-"nmap <Space>k [quickrun]
-"nnoremap <silent> [quickrun]r :call QRunRspecCurrentLine()<CR>
-"fun! QRunRspecCurrentLine()
-"  let line = line(".")
-"  exe ":QuickRun -cmdopt '-s -v --nologcapture -a " . '"now"' . "'"
-"endfun
 
 " window risezer---------------------------------------------------
 let g:winresizer_enable = 1
 let g:winresizer_start_key = '<C-F>'
 
+" unite setting---------------------------------------------------
+let g:unite_enable_start_insert=1
+let g:unite_source_history_yank_enable =1
+let g:unite_source_file_mru_limit = 200
+
+" ================================================================================
+" lang============================================================================
+" ================================================================================
 
 " ============================================================
 " for python edit
