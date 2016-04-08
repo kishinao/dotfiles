@@ -25,7 +25,7 @@ set backspace=indent,eol,start
 set wildmenu
 set formatoptions+=mM
 set whichwrap=b,s,h,l,[,],<,>
-set mouse=a
+"set mouse=a
 set ttymouse=xterm2
 
 " 罫線----------------------------------------------
