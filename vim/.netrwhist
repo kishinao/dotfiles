@@ -1,5 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_cnt =4
 let g:netrw_dirhist_1='/Users/naotospace/dotfiles/vim'
 let g:netrw_dirhist_2='/Users/naotospace/dotfiles/bundle/nerdtree'
 let g:netrw_dirhist_3='/Users/naotospace/workspace/practice/infra/vagrant/hashicorp_precise64'
+let g:netrw_dirhist_4='/Users/kishinao/Downloads'
