@@ -108,6 +108,7 @@ call neobundle#begin(expand('~/.vim/bundle/'))
     NeoBundle 'tyru/open-browser.vim'
     NeoBundle 'vim-scripts/grep.vim'
     NeoBundle 'slim-template/vim-slim.git'
+    NeoBundle 'simeji/winresizer'
 
 call neobundle#end()
 
@@ -170,7 +171,7 @@ set splitbelow
 
 " window risezer---------------------------------------------------
 let g:winresizer_enable = 1
-let g:winresizer_start_key = '<C-F>'
+let g:winresizer_start_key = '<C-T>'
 
 " unite setting---------------------------------------------------
 let g:unite_enable_start_insert=1
