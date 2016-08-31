@@ -10,6 +10,7 @@ git submodule update
 git config --global alias.st status
 git config --global alias.co checkout
 git config --global alias.br branch
+git config --global color.ui true
 
 cd ~
 ln -s ~/dotfiles/vimrc ~/.vimrc
