@@ -113,6 +113,7 @@ call neobundle#begin(expand('~/.vim/bundle/'))
     NeoBundle 'tyru/open-browser.vim'
     NeoBundle 'vim-scripts/grep.vim'
     NeoBundle 'slim-template/vim-slim.git'
+    NeoBundle 'simeji/winresizer'
 
 call neobundle#end()
 " }}}
