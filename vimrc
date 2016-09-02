@@ -1,10 +1,10 @@
-" ============================================================
-" basic
-" ============================================================
+" {{{ basic
+" -------------------------------------------------------
 syntax on
 set nocompatible
-"syntax enable
-"filetype plugin indent on
+syntax enable
+filetype plugin indent on
+
 
 " display----------------------------------------------
 set number
@@ -27,8 +27,9 @@ set formatoptions+=mM
 set whichwrap=b,s,h,l,[,],<,>
 "set mouse=a
 set ttymouse=xterm2
+" }}}
 
-" 罫線----------------------------------------------
+" {{{ 罫線----------------------------------------------
 augroup cch
     autocmd! cch
     autocmd WinLeave * set nocursorline
@@ -36,16 +37,18 @@ augroup cch
     autocmd WinEnter,BufRead * set cursorline
     "autocmd WinEnter,BufRead * set cursorcolumnn
 augroup END
+"}}}
 
-" search----------------------------------------------
+" {{{ search----------------------------------------------
 set history=100
 set ignorecase
 set smartcase
 set wrapscan
 set incsearch
 set hlsearch
+" }}}
 
-" for Whitespace----------------------------------------------
+" {{{for Whitespace----------------------------------------------
 " highlight WhitespaceEOL ctermbg=red guibg=red
 " match WhitespaceEOL /\s\+$/
 augroup HighlightTrailingSpaces
@@ -53,23 +56,25 @@ augroup HighlightTrailingSpaces
   autocmd VimEnter,WinEnter,ColorScheme * highlight TrailingSpaces term=underline guibg=Red ctermbg=Red
   autocmd VimEnter,WinEnter * match TrailingSpaces /\(\s\+$\|　\)/
 augroup END
+"}}}
 
-" key map edit------------------------------------------------
-inoremap <C-J> <ESC>
+" {{{ key map edit------------------------------------------------
 nnoremap <silent> gp :bprevious<CR>
 nnoremap <silent> gn :bnext<CR>
+" }}}
 
-" ============================================================
-" plugin
+"{{{ proc
 " ============================================================
 if has('mac')
-  let g:vimproc_dll_path = $VIMRUNTIME . '/bundle/vimproc/lib/vimproc_mac.so'
+  let g:vimproc_dll_path = $VIMRUNTIME . '.vim/bundle/vimproc/lib/vimproc_mac.so'
 elseif has('win32')
   let g:vimproc_dll_path = $HOME . '.vim/bundle/vimproc/autoload/vimproc_win32.dll'
 elseif has('win64')
   let g:vimproc_dll_path = $HOME . '.vim/bundle/vimproc/autoload/vimproc_win64.dll'
 endif
+" }}}
 
+" {{{ Plugin
 " neobundle---------------------------------------------------
 set nocompatible               " Be iMproved
 filetype off                   " Required!
@@ -110,8 +115,9 @@ call neobundle#begin(expand('~/.vim/bundle/'))
     NeoBundle 'slim-template/vim-slim.git'
 
 call neobundle#end()
+" }}}
 
-" colorscheme ----------------------------------------------
+" {{{ colorscheme ----------------------------------------------
 if &term =~ "xterm-256color" || "screen-256color"
   set t_Co=256
   set t_Sf=[3%dm
@@ -122,7 +128,9 @@ elseif &term =~ "xterm-color"
   set t_Sb=[4%dm
 endif
 "colorscheme jellybeans
+" }}}
 
+" {{{ Indent
 filetype plugin indent on     " Required!
 " Installation check.
 if neobundle#exists_not_installed_bundles()
@@ -131,25 +139,28 @@ if neobundle#exists_not_installed_bundles()
     echomsg 'Please execute ":NeoBundleInstall" command.'
     "finish
 endif
+" }}}
 
-" NERDTree---------------------------------------------------
+" {{{ NERDTree---------------------------------------------------
 let file_name = expand("%")
 if has('vim_starting') &&  file_name == ""
     autocmd VimEnter * NERDTree ./
 endif
 " NERDTreeToggle Keymap
-nmap <silent> <C-E> :NERDTreeToggle<CR>
+nmap <Space>e :NERDTreeToggle<CR>
+" }}}
 
-
-" neocomplache---------------------------------------------------
+" {{{ Neocomplcache
 let g:neocomplcache_enable_at_startup = 1
+" }}}
 
-" Enable omni completion. Not required if they are already set elsewhere in .vimrc
+" {{{ Enable omni completion. Not required if they are already set elsewhere in .vimrc
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+" }}}
 
-" neosnippet---------------------------------------------------
+" {{{ neosnippet---------------------------------------------------
 " Plugin key-mappings.
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
@@ -162,27 +173,26 @@ smap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" 
 if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
+" }}}
 
-" quickrun settings---------------------------------------------------
+" {{{ quickrun settings---------------------------------------------------
 let g:quickrun_config={'*': {'split': ''}}
 set splitbelow
+" }}}
 
 
-" window risezer---------------------------------------------------
+" {{{ window risezer---------------------------------------------------
 let g:winresizer_enable = 1
-let g:winresizer_start_key = '<C-F>'
+let g:winresizer_start_key = '<C-E>'
+" }}}
 
-" unite setting---------------------------------------------------
+" {{{ unite setting---------------------------------------------------
 let g:unite_enable_start_insert=1
 let g:unite_source_history_yank_enable =1
 let g:unite_source_file_mru_limit = 200
+" }}}
 
-" ================================================================================
-" lang============================================================================
-" ================================================================================
-
-" ============================================================
-" for python edit
+" {{{for python edit
 " ============================================================
 filetype plugin on
 autocmd FileType python setl autoindent
@@ -190,10 +200,6 @@ autocmd FileType python setl smartindent cinwords=if,elif,else,for,while,try,exc
 autocmd FileType python setl expandtab tabstop=8 shiftwidth=4 softtabstop=4
 " autocmd FileType python setl cindent
 autocmd FileType python setl textwidth=80
-
-" Folding
-setl foldmethod=indent
-setl foldlevel=99
 
 " Excute python script C-P
 function! s:ExecPy()
@@ -210,14 +216,14 @@ autocmd FileType python map <C-N> :!nosetests % -s -v -a ''
 
 " For Python_diction
 autocmd FileType python let g:pydiction_location = '~/.vim/pydiction/complete-dict'
+" }}}
 
-" ============================================================
-" for Markdown edit
+" {{{ for Markdown edit
 " ============================================================
 au BufRead,BufNewFile *.md set filetype=markdown
+" }}}
 
-" ============================================================
-" for javascript edit
+" {{{ for javascript edit
 " ============================================================
 let g:syntastic_mode_map = {
 \ "mode" : "active",
@@ -244,11 +250,16 @@ let g:syntastic_mode_map = {
 "unlet s:cpo_save
 "
 "autocmd FileType javascript :compiler javascriptlint
+" }}}
 
-" ============================================================
-" for ruby edit
+" {{{ for ruby edit
 " ============================================================
 autocmd FileType ruby setl autoindent
 autocmd FileType ruby setl smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 autocmd FileType ruby setl expandtab tabstop=2 shiftwidth=2 softtabstop=2
 autocmd FileType ruby setl textwidth=80
+" }}}
+
+" vim: foldmethod=marker
+" vim: foldcolumn=3
+" vim: foldlevel=0
