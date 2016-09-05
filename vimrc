@@ -1,4 +1,4 @@
-" {{{ basic
+"j{{{ basic
 " -------------------------------------------------------
 syntax on
 set nocompatible
@@ -114,6 +114,8 @@ call neobundle#begin(expand('~/.vim/bundle/'))
     NeoBundle 'vim-scripts/grep.vim'
     NeoBundle 'slim-template/vim-slim.git'
     NeoBundle 'simeji/winresizer'
+    NeoBundle 'tpope/vim-fugitive'
+    NeoBundle 'airblade/vim-gitgutter'
 
 call neobundle#end()
 " }}}
@@ -181,7 +183,6 @@ let g:quickrun_config={'*': {'split': ''}}
 set splitbelow
 " }}}
 
-
 " {{{ window risezer---------------------------------------------------
 let g:winresizer_enable = 1
 let g:winresizer_start_key = '<C-E>'
@@ -191,6 +192,22 @@ let g:winresizer_start_key = '<C-E>'
 let g:unite_enable_start_insert=1
 let g:unite_source_history_yank_enable =1
 let g:unite_source_file_mru_limit = 200
+" }}}
+
+" {{{ GitGutter
+"let g:gitgutter_highlight_lines = 1
+"let g:gitgutter_override_sign_column_highlight = 0
+" 色変更
+highlight GitGutterAdd ctermfg=green
+highlight itGutterChangeLine ctermfg=yellow
+highlight itGutterDeleteLine ctermfg=red
+highlight itGutterChangeDeleteLine ctermfg=yellow
+" 文字変更
+"let g:gitgutter_sign_added = '+'
+"let g:gitgutter_sign_modified = 'yy'
+"let g:gitgutter_sign_removed = '-'
+"let g:gitgutter_sign_removed_first_line = '^^'
+"let g:gitgutter_sign_modified_removed = 'ww'
 " }}}
 
 " {{{for python edit
