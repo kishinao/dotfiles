@@ -66,11 +66,11 @@ nnoremap <silent> gn :bnext<CR>
 "{{{ proc
 " ============================================================
 if has('mac')
-  let g:vimproc_dll_path = $VIMRUNTIME . '.vim/bundle/vimproc/lib/vimproc_mac.so'
+  let g:vimproc_dll_path = '~/.vim/bundle/vimproc.vim/lib/vimproc_mac.so'
 elseif has('win32')
-  let g:vimproc_dll_path = $HOME . '.vim/bundle/vimproc/autoload/vimproc_win32.dll'
+  let g:vimproc_dll_path = $HOME . '.vim/bundle/vimproc.vim/autoload/vimproc_win32.dll'
 elseif has('win64')
-  let g:vimproc_dll_path = $HOME . '.vim/bundle/vimproc/autoload/vimproc_win64.dll'
+  let g:vimproc_dll_path = $HOME . '.vim/bundle/vimproc.vim/autoload/vimproc_win64.dll'
 endif
 " }}}
 
@@ -90,15 +90,15 @@ call neobundle#begin(expand('~/.vim/bundle/'))
     NeoBundle "Shougo/neosnippet-snippets"
     NeoBundle 'Shougo/unite.vim'
     NeoBundle 'Shougo/neomru.vim'
-    NeoBundle 'Shougo/vimproc.vim', {
-          \ 'build' : {
-          \     'windows' : 'tools\\update-dll-mingw',
-          \     'cygwin' : 'make -f make_cygwin.mak',
-          \     'mac' : 'make',
-          \     'linux' : 'make',
-          \     'unix' : 'gmake',
-          \    },
-          \ },
+	  NeoBundle 'Shougo/vimproc.vim', {
+	        \   'build' : {
+	        \     'windows' : 'tools\\update-dll-mingw',
+	        \     'cygwin' : 'make -f make_cygwin.mak',
+	        \     'mac' : 'make -f make_mac.mak',
+	        \     'linux' : 'make',
+	        \     'unix' : 'gmake',
+	        \   }
+	        \ }
     NeoBundle 'Lokaltog/vim-powerline'
     NeoBundle 'scrooloose/nerdtree'
     NeoBundle 'thinca/vim-quickrun'
