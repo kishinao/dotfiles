@@ -1,7 +1,6 @@
 # nk dotfiles
 
 ```
-git clone git@github.com:naotospace/dotfiles.git
-sh ./dotfiles/setup.sh
+git clone https://github.com/naotospace/dotfiles.git && sh ./dotfiles/setup.sh
 ```
 
