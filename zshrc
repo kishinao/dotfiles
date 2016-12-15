@@ -58,11 +58,15 @@ plugins=(git)
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # rbenv
-export RBENV_ROOT="/usr/local/rbenv"
-export PATH="${RBENV_ROOT}/bin:${PATH}"
-eval "$(rbenv init -)"
+if [ -f "/usr/local/rbenv" ]; then
+  export RBENV_ROOT="/usr/local/rbenv"
+  export PATH="${RBENV_ROOT}/bin:${PATH}"
+  eval "$(rbenv init -)"
+fi
 
-source $ZSH/oh-my-zsh.sh
+if [ -f "$ZSH/oh-my-zsh.sh" ]; then
+  source $ZSH/oh-my-zsh.sh
+fi
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
