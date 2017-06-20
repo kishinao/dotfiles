@@ -1,7 +1,6 @@
 # nk dotfiles
 
 ```
-git clone git@github.com:naotospace/dotfiles.git
-sh ./dotfiles/setup.sh
+curl https://raw.githubusercontent.com/N4070/dotfiles/master/setup.sh | sh
 ```
 
