@@ -1,3 +1,5 @@
+cd ~/
+git clone https://github.com/N4070/dotfiles.git
 cd ~/dotfiles/vim/bundle
 git clone https://github.com/scrooloose/nerdtree.git
 git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
