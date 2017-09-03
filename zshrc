@@ -59,9 +59,12 @@ plugins=(git)
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # rbenv
-export RBENV_ROOT="/usr/local/rbenv"
-export PATH="${RBENV_ROOT}/bin:${PATH}"
-eval "$(rbenv init -)"
+if which rbenv &> /dev/null; then
+  export RBENV_ROOT="/usr/local/rbenv"
+  export PATH="${RBENV_ROOT}/bin:${PATH}"
+  eval "$(rbenv init -)"
+fi
+
 
 source $ZSH/oh-my-zsh.sh
 
