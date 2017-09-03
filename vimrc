@@ -1,4 +1,4 @@
-"j{{{ basic
+"{{{ basic
 " -------------------------------------------------------
 syntax on
 set nocompatible
@@ -130,7 +130,7 @@ elseif &term =~ "xterm-color"
   set t_Sf=[3%dm
   set t_Sb=[4%dm
 endif
-"colorscheme jellybeans
+colorscheme jellybeans
 " }}}
 
 " {{{ Indent
@@ -203,11 +203,16 @@ highlight itGutterChangeLine ctermfg=yellow
 highlight itGutterDeleteLine ctermfg=red
 highlight itGutterChangeDeleteLine ctermfg=yellow
 " 文字変更
-"let g:gitgutter_sign_added = '+'
-"let g:gitgutter_sign_modified = 'yy'
-"let g:gitgutter_sign_removed = '-'
-"let g:gitgutter_sign_removed_first_line = '^^'
-"let g:gitgutter_sign_modified_removed = 'ww'
+let g:gitgutter_sign_added = '+'
+let g:gitgutter_sign_modified = 'm'
+let g:gitgutter_sign_removed = '-'
+let g:gitgutter_sign_removed_first_line = '^^'
+let g:gitgutter_sign_modified_removed = 'ww'
+" }}}
+
+" {{{ Previm setting
+au BufRead,BufNewFile *.md set filetype=markdown
+"let g:previm_open_cmd = 'open -a chrome'
 " }}}
 
 " {{{for python edit
