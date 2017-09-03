@@ -172,6 +172,11 @@ au BufRead,BufNewFile *.md set filetype=markdown
 "let g:previm_open_cmd = 'open -a chrome'
 " }}}
 
+" {{{ Vimfiler Setting
+let g:vimfiler_as_default_explorer = 1
+noremap <Space>e :VimFilerExplorer<CR>
+" }}}
+
 " {{{for python edit
 " ============================================================
 filetype plugin on
