@@ -1,6 +1,6 @@
 vim/
 vim/*
 vim/\.*
-!vim/bundle/neobundle.vim
 *swp
 oh-my-zsh
+vim/.netrwhist

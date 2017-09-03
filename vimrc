@@ -65,59 +65,36 @@ nnoremap <silent> gn :bnext<CR>
 
 "{{{ proc
 " ============================================================
-if has('mac')
-  let g:vimproc_dll_path = '~/.vim/bundle/vimproc.vim/lib/vimproc_mac.so'
-elseif has('win32')
-  let g:vimproc_dll_path = $HOME . '.vim/bundle/vimproc.vim/autoload/vimproc_win32.dll'
-elseif has('win64')
-  let g:vimproc_dll_path = $HOME . '.vim/bundle/vimproc.vim/autoload/vimproc_win64.dll'
-endif
+"if has('mac')
+"  let g:vimproc_dll_path = '~/.vim/bundle/vimproc.vim/lib/vimproc_mac.so'
+"elseif has('win32')
+"  let g:vimproc_dll_path = $HOME . '.vim/bundle/vimproc.vim/autoload/vimproc_win32.dll'
+"elseif has('win64')
+"  let g:vimproc_dll_path = $HOME . '.vim/bundle/vimproc.vim/autoload/vimproc_win64.dll'
+"endif
 " }}}
 
 " {{{ Plugin
-" neobundle---------------------------------------------------
-set nocompatible               " Be iMproved
-filetype off                   " Required!
-if has('vim_starting')
-    set runtimepath+=~/.vim/bundle/neobundle.vim/
-endif
-
-call neobundle#begin(expand('~/.vim/bundle/'))
-    NeoBundleFetch 'Shougo/neobundle.vim'
-    NeoBundle 'Shougo/neobundle.vim'
-    NeoBundle 'Shougo/neocomplcache'
-    NeoBundle 'Shougo/neosnippet'
-    NeoBundle "Shougo/neosnippet-snippets"
-    NeoBundle 'Shougo/unite.vim'
-    NeoBundle 'Shougo/neomru.vim'
-	  NeoBundle 'Shougo/vimproc.vim', {
-	        \   'build' : {
-	        \     'windows' : 'tools\\update-dll-mingw',
-	        \     'cygwin' : 'make -f make_cygwin.mak',
-	        \     'mac' : 'make -f make_mac.mak',
-	        \     'linux' : 'make',
-	        \     'unix' : 'gmake',
-	        \   }
-	        \ }
-    NeoBundle 'Lokaltog/vim-powerline'
-    NeoBundle 'scrooloose/nerdtree'
-    NeoBundle 'thinca/vim-quickrun'
-    NeoBundle 'nvie/vim-flake8'
-    "NeoBundle 'Shougo/vimshell'
-    NeoBundle 'w0ng/vim-hybrid'
-    NeoBundle 'nanotech/jellybeans.vim'
-    NeoBundle 'scrooloose/syntastic'
-    " render - :PrevimOpen
-    NeoBundle 'plasticboy/vim-markdown'
-    NeoBundle 'kannokanno/previm'
-    NeoBundle 'tyru/open-browser.vim'
-    NeoBundle 'vim-scripts/grep.vim'
-    NeoBundle 'slim-template/vim-slim.git'
-    NeoBundle 'simeji/winresizer'
-    NeoBundle 'tpope/vim-fugitive'
-    NeoBundle 'airblade/vim-gitgutter'
-
-call neobundle#end()
+call plug#begin('~/.vim/plugged')
+Plug 'Shougo/neocomplcache'
+Plug 'Shougo/neomru.vim'
+Plug 'Shougo/neosnippet'
+Plug 'Shougo/neosnippet-snippets'
+Plug 'Shougo/unite.vim'
+Plug 'Shougo/vimfiler.vim'
+Plug 'airblade/vim-gitgutter'
+Plug 'kannokanno/previm'
+Plug 'nanotech/jellybeans.vim'
+Plug 'nvie/vim-flake8'
+Plug 'plasticboy/vim-markdown'
+Plug 'scrooloose/syntastic'
+Plug 'simeji/winresizer'
+Plug 'thinca/vim-quickrun'
+Plug 'tpope/vim-fugitive'
+Plug 'tyru/open-browser.vim'
+Plug 'vim-scripts/grep.vim'
+Plug 'w0ng/vim-hybrid'
+call plug#end()
 " }}}
 
 " {{{ colorscheme ----------------------------------------------
@@ -131,26 +108,6 @@ elseif &term =~ "xterm-color"
   set t_Sb=[4%dm
 endif
 colorscheme jellybeans
-" }}}
-
-" {{{ Indent
-filetype plugin indent on     " Required!
-" Installation check.
-if neobundle#exists_not_installed_bundles()
-    echomsg 'Not installed bundles : ' .
-           \ string(neobundle#get_not_installed_bundle_names())
-    echomsg 'Please execute ":NeoBundleInstall" command.'
-    "finish
-endif
-" }}}
-
-" {{{ NERDTree---------------------------------------------------
-let file_name = expand("%")
-if has('vim_starting') &&  file_name == ""
-    autocmd VimEnter * NERDTree ./
-endif
-" NERDTreeToggle Keymap
-nmap <Space>e :NERDTreeToggle<CR>
 " }}}
 
 " {{{ Neocomplcache
