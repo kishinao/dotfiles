@@ -5,7 +5,6 @@ set nocompatible
 syntax enable
 filetype plugin indent on
 
-
 " display----------------------------------------------
 set number
 set ruler
@@ -31,11 +30,11 @@ set ttymouse=xterm2
 
 " {{{ 罫線----------------------------------------------
 augroup cch
-    autocmd! cch
-    autocmd WinLeave * set nocursorline
-    "autocmd WinLeave * set nocursorcolumn
-    autocmd WinEnter,BufRead * set cursorline
-    "autocmd WinEnter,BufRead * set cursorcolumnn
+  autocmd! cch
+  autocmd WinLeave * set nocursorline
+  "autocmd WinLeave * set nocursorcolumn
+  autocmd WinEnter,BufRead * set cursorline
+  "autocmd WinEnter,BufRead * set cursorcolumnn
 augroup END
 "}}}
 
@@ -81,7 +80,6 @@ Plug 'Shougo/neomru.vim'
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'Shougo/unite.vim'
-Plug 'Shougo/vimfiler.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'kannokanno/previm'
 Plug 'nanotech/jellybeans.vim'
@@ -94,6 +92,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tyru/open-browser.vim'
 Plug 'vim-scripts/grep.vim'
 Plug 'w0ng/vim-hybrid'
+Plug 'cocopon/vaffle.vim'
 call plug#end()
 " }}}
 
@@ -172,9 +171,16 @@ au BufRead,BufNewFile *.md set filetype=markdown
 "let g:previm_open_cmd = 'open -a chrome'
 " }}}
 
-" {{{ Vimfiler Setting
-let g:vimfiler_as_default_explorer = 1
-noremap <Space>e :VimFilerExplorer<CR>
+" {{{ Vaffle Setting
+nnoremap <Space>e :Vaffle<CR>
+" if need keymap when open vaffle
+"function! s:customize_vaffle_mappings() abort
+"  "nmap q <Plug>(vaffle-quit)
+"endfunction
+"augroup vimrc_vaffle
+"  autocmd!
+"  autocmd FileType vaffle call s:customize_vaffle_mappings()
+"augroup END
 " }}}
 
 " {{{for python edit

@@ -57,13 +57,9 @@ plugins=(git)
   export PATH="/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/opt/aws/bin:/home/kishinao/.local/bin:/home/kishinao/bin:/opt/aws/bin:/home/kishinao/bin:/opt/aws/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
-# rbenv
-if which rbenv &> /dev/null; then
-  export RBENV_ROOT="/usr/local/rbenv"
-  export PATH="${RBENV_ROOT}/bin:${PATH}"
-  eval "$(rbenv init -)"
-fi
-
+# anyenv
+export PATH="$HOME/.anyenv/bin:$PATH"
+eval "$(anyenv init -)"
 
 if [ -f "$ZSH/oh-my-zsh.sh" ]; then
   source $ZSH/oh-my-zsh.sh
