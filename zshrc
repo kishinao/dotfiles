@@ -1,13 +1,9 @@
-# Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
 
 ZSH_THEME="awesomepanda"
 export LSCOLORS=exfxcxdxbxegedabagacad
 export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
-
 plugins=(git)
-
-# User configuration
 
 export PATH="/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/opt/aws/bin:/home/kishinao/.local/bin:/home/kishinao/bin:/opt/aws/bin:/home/kishinao/bin:/opt/aws/bin"
 
@@ -47,3 +43,5 @@ SAVEHIST=100000
 
 # 256color
 export TERM=xterm-256color
+alias ebb='vim ~/dotfiles/mac/Brewfile'
+alias rbb='cd ~/dotfiles/mac && brew bundle'
