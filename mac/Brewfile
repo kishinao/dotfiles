@@ -13,3 +13,10 @@ cask "kindle"
 cask "skype"
 cask "macvim"
 # cask "line"
+# cask "microsoft-remote-desktop-beta"
+brew "python"
+cask 'mysqlworkbench'
+cask 'freemind'
+cask 'pycharm'
+brew "nodebrew"
+cask 'evernote'

@@ -45,3 +45,6 @@ SAVEHIST=100000
 export TERM=xterm-256color
 alias ebb='vim ~/dotfiles/mac/Brewfile'
 alias rbb='cd ~/dotfiles/mac && brew bundle'
+
+# nodebrew
+export PATH=$HOME/.nodebrew/current/bin:$PATH
