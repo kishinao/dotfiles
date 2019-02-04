@@ -1,22 +1,27 @@
+# cask "docker"
+# cask "google-japanese-ime"
+# cask "karabiner-elements"
+# cask "kindle"
+# cask "line"
+# cask "macvim"
+# cask "microsoft-remote-desktop-beta"
+# cask "skype"
+# cask 'freemind'
+# cask 'mysqlworkbench'
+# cask 'pycharm'
+# cask 'alfred'
+# cask 'evernote'
+
 cask_args appdir: "/Applications"
 tap "caskroom/cask"
 brew "git"
+brew "nodebrew"
 brew "peco"
+brew "python"
 brew "zsh"
-cask "visual-studio-code"
-cask "docker"
-cask "karabiner-elements"
+brew 'go'
+brew 'ghq'
 cask "appcleaner"
 cask "iterm2"
-cask "google-japanese-ime"
-cask "kindle"
-cask "skype"
-cask "macvim"
-# cask "line"
-# cask "microsoft-remote-desktop-beta"
-brew "python"
-cask 'mysqlworkbench'
-cask 'freemind'
-cask 'pycharm'
-brew "nodebrew"
-cask 'evernote'
+cask "visual-studio-code"
+cask 'spectacle'

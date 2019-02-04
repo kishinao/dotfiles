@@ -43,8 +43,13 @@ SAVEHIST=100000
 
 # 256color
 export TERM=xterm-256color
+
+# brew bundle
 alias ebb='vim ~/dotfiles/mac/Brewfile'
 alias rbb='cd ~/dotfiles/mac && brew bundle'
 
 # nodebrew
 export PATH=$HOME/.nodebrew/current/bin:$PATH
+
+# ghq
+alias g='cd $(ghq root)/$(ghq list | peco)'
