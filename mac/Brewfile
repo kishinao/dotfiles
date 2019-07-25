@@ -25,3 +25,15 @@ cask "appcleaner"
 cask "iterm2"
 cask "visual-studio-code"
 cask 'spectacle'
+brew 'iproute2mac'
+brew 'python'
+brew 'shellcheck'
+brew 'git-secrets'
+brew 'jq'
+brew 'node'
+brew 'terraform'
+brew 'parallel'
+tap "jesseduffield/lazydocker"
+brew 'lazydocker'
+brew 'lazygit'
+brew 'fzf'

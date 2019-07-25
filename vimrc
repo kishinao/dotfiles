@@ -9,9 +9,7 @@ filetype plugin indent on
 set number
 set ruler
 set laststatus=2
-"新しい行を作ったときに高度な自動インデントを行う
-set smartindent
-"行頭の余白内で Tab を打ち込むと、'shiftwidth' の数だけインデントする。
+"新しい行を作ったときに高度な自動インデントを行うset smartindent "行頭の余白内で Tab を打ち込むと、'shiftwidth' の数だけインデントする。
 set smarttab
 set shiftwidth=4
 set softtabstop=4
@@ -106,7 +104,7 @@ elseif &term =~ "xterm-color"
   set t_Sf=[3%dm
   set t_Sb=[4%dm
 endif
-colorscheme jellybeans
+" colorscheme jellybeans
 " }}}
 
 " {{{ Neocomplcache
@@ -121,12 +119,12 @@ autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 
 " {{{ neosnippet---------------------------------------------------
 " Plugin key-mappings.
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+" imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+" smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 "
 "" SuperTab like snippets behavior.
-imap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+" imap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+" smap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 "
 "" For snippet_complete marker.
 if has('conceal')

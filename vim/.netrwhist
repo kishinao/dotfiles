@@ -1,7 +1,9 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =5
-let g:netrw_dirhist_1='/Users/naotospace/dotfiles/vim'
-let g:netrw_dirhist_2='/Users/naotospace/dotfiles/bundle/nerdtree'
-let g:netrw_dirhist_3='/Users/naotospace/workspace/practice/infra/vagrant/hashicorp_precise64'
-let g:netrw_dirhist_4='/Users/kishinao/Downloads'
-let g:netrw_dirhist_5='/home/vagrant/dotfiles/vim'
+let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_1='/Users/kishinao/.ghq/github.com/lifull/ImageDifferenceTest/url_lists'
+let g:netrw_dirhist_2='/Users/kishinao/.ghq/github.com/lifull/ImageDifferenceTest/url_lists/gazosan-homes-test'
+let g:netrw_dirhist_3='/Users/kishinao/.ghq/github.com/lifull/ImageDifferenceTest'
+let g:netrw_dirhist_4='/Users/kishinao/work/terraform-test/.terraform'
+let g:netrw_dirhist_5='/Users/kishinao/work/terraform-test/.terraform/plugins'
+let g:netrw_dirhist_6='/Users/kishinao/work/terraform-test/.terraform'
+let g:netrw_dirhist_7='/Users/kishinao/.ghq/github.com/lifull/coe-at'
