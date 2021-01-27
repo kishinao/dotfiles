@@ -104,7 +104,7 @@ elseif &term =~ "xterm-color"
   set t_Sf=[3%dm
   set t_Sb=[4%dm
 endif
-" colorscheme jellybeans
+colorscheme jellybeans
 " }}}
 
 " {{{ Neocomplcache

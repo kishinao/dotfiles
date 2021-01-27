@@ -2,6 +2,10 @@ cd ~/
 git clone https://github.com/N4070/dotfiles.git
 curl -fLo ~/dotfiles/vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
+mkdir -p ~/.vim/colors
+cd ~/.vim/colors
+curl -O https://raw.githubusercontent.com/nanotech/jellybeans.vim/master/colors/jellybeans.vim
+
 cd ~/dotfiles/
 git submodule init
 git submodule update
