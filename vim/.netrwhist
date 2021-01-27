@@ -1,9 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =7
-let g:netrw_dirhist_1='/Users/kishinao/.ghq/github.com/lifull/ImageDifferenceTest/url_lists'
-let g:netrw_dirhist_2='/Users/kishinao/.ghq/github.com/lifull/ImageDifferenceTest/url_lists/gazosan-homes-test'
-let g:netrw_dirhist_3='/Users/kishinao/.ghq/github.com/lifull/ImageDifferenceTest'
-let g:netrw_dirhist_4='/Users/kishinao/work/terraform-test/.terraform'
-let g:netrw_dirhist_5='/Users/kishinao/work/terraform-test/.terraform/plugins'
-let g:netrw_dirhist_6='/Users/kishinao/work/terraform-test/.terraform'
-let g:netrw_dirhist_7='/Users/kishinao/.ghq/github.com/lifull/coe-at'
