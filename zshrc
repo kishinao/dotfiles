@@ -73,10 +73,3 @@ alias tfplan='terraform plan'
 # lazy*
 alias lzd='lazydocker'
 alias ldg='lazygit'
-
-# docker
-alias d='docker'
-alias dc='docker-compose'
-alias be2e='docker exec -it ldat-unit bucky run -t e2e -d'
-alias blink='docker exec -it ldat-unit bucky run -t linkstatus -d'
-alias bc='docker exec -it ldat-unit bucky run -t e2e -d -c'
